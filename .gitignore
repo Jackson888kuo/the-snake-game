@@ -1,0 +1,43 @@
+# 作業系統檔案
+.DS_Store
+Thumbs.db
+
+# 編輯器目錄和檔案
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# 依賴目錄
+node_modules/
+
+# 建置輸出
+dist/
+build/
+
+# 環境變數檔案
+.env
+.env.local
+.env.*.local
+
+# 日誌檔案
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 快取目錄
+.cache/
+.temp/
+.tmp/
+
+# 測試覆蓋率
+coverage/
+
+# 本機開發伺服器
+.server/
