@@ -1,14 +1,43 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-TW">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-    <link rel="stylesheet" href="./src/css/style.css">
+    <title>貪吃蛇遊戲</title>
+    <link rel="stylesheet" href="/src/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="./src/js/main.js"></script>
+    <div id="app">
+      <!-- 開始畫面 -->
+      <div id="start-screen" class="screen">
+        <h1>貪吃蛇遊戲</h1>
+        <div class="preview-canvas-container">
+          <canvas id="preview-canvas"></canvas>
+        </div>
+        <div class="controls">
+          <h2>控制方式</h2>
+          <div class="keyboard-keys">
+            <div class="key-row">
+              <div class="key key-up">↑</div>
+            </div>
+            <div class="key-row">
+              <div class="key key-left">←</div>
+              <div class="key key-down">↓</div>
+              <div class="key key-right">→</div>
+            </div>
+          </div>
+          <p>或使用 <span class="key">WASD</span> 鍵控制方向</p>
+          <p>按 <span class="key">P</span> 暫停遊戲</p>
+        </div>
+        <button id="start-button" class="start-button">開始遊戲</button>
+      </div>
+      
+      <!-- 遊戲畫面 -->
+      <div id="game-screen" class="screen hidden">
+        <div id="game-container"></div>
+      </div>
+    </div>
+    <script type="module" src="/src/js/main.js"></script>
   </body>
 </html>

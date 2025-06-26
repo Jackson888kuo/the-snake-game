@@ -4,25 +4,297 @@
   box-sizing: border-box;
 }
 
+:root {
+  --primary-color: #4CAF50;
+  --secondary-color: #45a049;
+  --accent-color: #8BC34A;
+  --text-color: #333;
+  --light-bg: #f5f5f5;
+  --key-bg: #e0e0e0;
+  --key-shadow: #bdbdbd;
+}
+
 body {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Ma Shan Zheng', cursive, system-ui, -apple-system, sans-serif;
+  background-color: var(--light-bg);
+  color: var(--text-color);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background-color: #f0f0f0;
-  margin: 0;
-  padding: 20px;
 }
 
 #app {
-  text-align: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 3.5rem;
+  color: var(--primary-dark);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+  letter-spacing: 2px;
+}
+
+h2 {
+  color: var(--primary-dark);
+  margin: 1rem 0;
+  font-size: 1.8rem;
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  padding: 2rem;
+}
+
+.hidden {
+  display: none;
+}
+
+/* 開始畫面 */
+#start-screen {
+  animation: fadeIn 0.5s ease-in-out;
+  background-image: url('/images/game-background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  padding: 3rem 2rem;
+  border-radius: 15px;
+}
+
+#start-screen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  border-radius: 15px;
+}
+
+#start-screen > * {
+  position: relative;
+  z-index: 2;
+}
+
+.preview-canvas-container {
+  position: relative;
+  margin: 2rem 0;
+  background: var(--white);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--medium-gray);
+  max-width: 400px;
+  width: 100%;
+}
+
+#preview-canvas {
+  width: 100%;
+  height: 200px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border: 2px solid var(--medium-gray);
+  margin-bottom: 1.5rem;
+}
+
+.controls {
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  margin: 1.5rem 0;
+  max-width: 400px;
+  width: 100%;
+}
+
+.keyboard-keys {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+.key-row {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: var(--white);
+  border: 2px solid var(--primary-color);
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--primary-dark);
+  box-shadow: 0 2px 0 var(--primary-dark);
+  transition: var(--transition);
+  user-select: none;
+}
+
+.key-up { transform: translateY(5px); }
+.key-down { transform: translateY(-5px); }
+
+.key-instructions {
+  margin: 1rem 0;
+  color: var(--dark-gray);
+  font-size: 0.9rem;
+}
+
+.start-button {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  color: white;
+  border: none;
+  padding: 1rem 3rem;
+  font-size: 1.2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 1rem;
+  box-shadow: 0 4px 0 var(--primary-dark), 0 6px 15px rgba(0,0,0,0.2);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.start-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+  opacity: 0;
+  transition: var(--transition);
+  z-index: -1;
+}
+
+.start-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 0 var(--primary-dark), 0 8px 20px rgba(0,0,0,0.25);
+}
+
+.start-button:hover::before {
+  opacity: 1;
+}
+
+.start-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--primary-dark), 0 3px 10px rgba(0,0,0,0.2);
+}
+
+/* 遊戲畫面 */
+#game-screen {
+  width: 100%;
+  padding: 2rem 0;
+}
+
+#game-container {
+  display: inline-block;
+  position: relative;
+  background: var(--white);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  margin: 1rem 0;
+  border: 1px solid var(--medium-gray);
 }
 
 canvas {
-  border: 2px solid #333;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: block;
+  background: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--medium-gray);
+}
+
+.score-display {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-dark);
+  margin: 1rem 0;
+  background: var(--white);
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  display: inline-block;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--medium-gray);
+}
+
+/* 動畫 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  
+  .preview-canvas-container, .controls {
+    max-width: 100%;
+  }
+  
+  .key {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  
+  .start-button {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .screen {
+    padding: 1rem;
+  }
+  
+  .preview-canvas-container, .controls {
+    padding: 1rem;
+  }
+  
+  .key {
+    width: 35px;
+    height: 35px;
+    font-size: 0.9rem;
+  }
 }
 
 a {
